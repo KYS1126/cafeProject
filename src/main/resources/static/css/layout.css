@@ -13,12 +13,13 @@ body {
 
 footer {
 	position: absolute;
-	left: 0;
-	right:0;
-	bottom: 0;
 	width: 100%;
-	padding: 15px 0;
 	text-align: center;
+	padding: 30px;
+}
+
+.my_footer {
+	color: white;
 }
 
 .content {
