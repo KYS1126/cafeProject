@@ -5,6 +5,7 @@ html {
 	min-height: 100%;
 	margin: 0;
 	padding: 0;
+	height: 100%;
 }
 
 body {
@@ -22,6 +23,4 @@ footer {
 	color: white;
 }
 
-.content {
-	margin: 50px 200px 100px 200px;
-}
+

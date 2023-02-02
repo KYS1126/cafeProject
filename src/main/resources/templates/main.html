@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>메인 페이지</title>
+
+
 <!-- 각 페이지의 CSS가 작성될 위치 -->
 <th:block layout:fragment="css">
 	<style>
@@ -72,6 +74,56 @@
 	float: right;
 }
 
+.my_slider {
+	margin: 0 auto;
+	width: 80%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+/* 스와이퍼 */
+.swiper {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.my_slider_card {
+	height: 200px;
+}
+
+.my_slider_card1 {
+	height: 30px;
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.my_slider_card2 {
+	height: 30px;
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.my_slider_card3 {
+	height: 120px;
+	text-align: left;
+}
 </style>
 </th:block>
 </head>
@@ -105,7 +157,7 @@
 					</div>
 					<div class="card-sub-body">
 						<div>
-							<button type="button" class="btn btn-outline-dark">♡찜하기</button>
+							<button type="button" class="btn btn-outline-dark">♡ 찜하기</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-outline-dark">후기 작성</button>
@@ -128,7 +180,7 @@
 					</div>
 					<div class="card-sub-body">
 						<div>
-							<button type="button" class="btn btn-outline-dark">♡찜하기</button>
+							<button type="button" class="btn btn-outline-dark">♡ 찜하기</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-outline-dark">후기 작성</button>
@@ -151,7 +203,7 @@
 					</div>
 					<div class="card-sub-body">
 						<div>
-							<button type="button" class="btn btn-outline-dark">♡찜하기</button>
+							<button type="button" class="btn btn-outline-dark">♡ 찜하기</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-outline-dark">후기 작성</button>
@@ -174,7 +226,7 @@
 					</div>
 					<div class="card-sub-body">
 						<div>
-							<button type="button" class="btn btn-outline-dark">♡찜하기</button>
+							<button type="button" class="btn btn-outline-dark">♡ 찜하기</button>
 						</div>
 						<div>
 							<button type="button" class="btn btn-outline-dark">후기 작성</button>
@@ -191,8 +243,76 @@
 
 		<!--  -->
 		<div class="my_push_bar">hot 한 리뷰</div>
+		<div class="my_slider">
+			<div class="swiper mySwiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="card" style="width: 18rem;">
+							<a href="#" class=""><img src="/images/cafe.png"
+								class="card-img-top" alt="..."></a>
+							<div class="my_slider_card">
+								<div class="my_slider_card1">Cafe Name</div>
+								<div class="my_slider_card2">Cafe Address</div>
+								<div class="my_slider_card3">후기 내용</div>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="card" style="width: 18rem;">
+							<a href="#" class=""><img src="/images/cafe.png"
+								class="card-img-top" alt="..."></a>
+							<div class="my_slider_card">
+								<div class="my_slider_card1">Cafe Name</div>
+								<div class="my_slider_card2">Cafe Address</div>
+								<div class="my_slider_card3">후기 내용</div>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="card" style="width: 18rem;">
+							<a href="#" class=""><img src="/images/cafe.png"
+								class="card-img-top" alt="..."></a>
+							<div class="my_slider_card">
+								<div class="my_slider_card1">Cafe Name</div>
+								<div class="my_slider_card2">Cafe Address</div>
+								<div class="my_slider_card3">후기 내용</div>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="card" style="width: 18rem;">
+							<a href="#" class=""><img src="/images/cafe.png"
+								class="card-img-top" alt="..."></a>
+							<div class="my_slider_card">
+								<div class="my_slider_card1">Cafe Name</div>
+								<div class="my_slider_card2">Cafe Address</div>
+								<div class="my_slider_card3">후기 내용</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
 
-asd
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+		<script>
+			
+			
+			var swiper = new Swiper(".mySwiper", {
+		      	slidesPerView: 3,
+		      	spaceBetween: 30,
+		      	 pagination: {
+		             el: ".swiper-pagination",
+		             clickable: true
+		           },
+		      	loop:true,
+		      	autoplay: {    
+		        	delay: 1000,
+		          	disableOnInteraction: false, 
+		        },
+		    });
+		</script>
 	</div>
 </body>
 </html>
