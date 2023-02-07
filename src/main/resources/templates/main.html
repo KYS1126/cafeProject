@@ -92,64 +92,27 @@
 					</div>
 				</div>
 				<div class="row g-4">
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" th:each="num:${#numbers.sequence(1,3)}">
 						<div class="membership-item position-relative">
 							<img class="img-fluid" src="/images/animal-lg-1.jpg" alt="" />
-							<h1 class="display-1">01</h1>
-							<h4 class="text-white mb-3">Popular</h4>
-							<h3 class="text-primary mb-4">$99.00</h3>
+							<h1 class="text-white mb-3">cafe name</h1>
+							<h3 class="text-white mb-3" style="font-size: 1.0rem">#tag</h3>
+							<h4 class="text-white mb-3">cafe address</h4>
 							<p>
-								<i class="fa fa-check text-primary me-3"></i>10% discount
+								<i class="fa fa-phone text-primary me-3"></i>cafe_tel
 							</p>
 							<p>
-								<i class="fa fa-check text-primary me-3"></i>2 adult and 2 child
+								<i class="fa fa-door-closed text-primary me-3"></i>cafe open
 							</p>
 							<p>
-								<i class="fa fa-check text-primary me-3"></i>Free animal
-								exhibition
-							</p>
-							<a class="btn btn-outline-light px-4 mt-3" href="">Get
-								Started</a>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-						<div class="membership-item position-relative">
-							<img class="img-fluid" src="/images/animal-lg-2.jpg" alt="" />
-							<h1 class="display-1">02</h1>
-							<h4 class="text-white mb-3">Standard</h4>
-							<h3 class="text-primary mb-4">$149.00</h3>
-							<p>
-								<i class="fa fa-check text-primary me-3"></i>15% discount
+								<i class="fa fa-star text-primary me-3"></i>평점 : 4.5
 							</p>
 							<p>
-								<i class="fa fa-check text-primary me-3"></i>4 adult and 4 child
+								<i class="fa fa-heart text-primary me-3"></i>찜 : 0
 							</p>
-							<p>
-								<i class="fa fa-check text-primary me-3"></i>Free animal
-								exhibition
-							</p>
-							<a class="btn btn-outline-light px-4 mt-3" href="">Get
-								Started</a>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-						<div class="membership-item position-relative">
-							<img class="img-fluid" src="/images/animal-lg-3.jpg" alt="" />
-							<h1 class="display-1">03</h1>
-							<h4 class="text-white mb-3">Premium</h4>
-							<h3 class="text-primary mb-4">$199.00</h3>
-							<p>
-								<i class="fa fa-check text-primary me-3"></i>20% discount
-							</p>
-							<p>
-								<i class="fa fa-check text-primary me-3"></i>6 adult and 6 child
-							</p>
-							<p>
-								<i class="fa fa-check text-primary me-3"></i>Free animal
-								exhibition
-							</p>
-							<a class="btn btn-outline-light px-4 mt-3" href="">Get
-								Started</a>
+							<div class="row g-3">
+								<div class="col-md-6"><button class="btn btn-outline-light px-4 mt-1">찜하기</button></div>
+							</div><a class="btn btn-outline-light px-4 mt-3" href="">상세보기</a>
 						</div>
 					</div>
 				</div>
