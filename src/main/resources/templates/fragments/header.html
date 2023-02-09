@@ -26,7 +26,8 @@
 				<div class="navbar-nav ms-auto">
 					<a href="/" class="nav-item nav-link active">Home</a> 
 					<a href="#" class="nav-item nav-link">게시판</a> 
-					<a href="/admin/insertcafe" class="nav-item nav-link" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">(관리자용)카페추가</a>
+					<a href="/cafe/list" class="nav-item nav-link" >전체 카페 리스트</a>
+					<a href="/cafe/insertcafe" class="nav-item nav-link" sec:authorize="hasAnyAuthority('ROLE_ADMIN')">(관리자용)카페추가</a>
 					<a href="/member/signup" class="nav-item nav-link" sec:authorize="isAnonymous()">회원가입</a>
 				</div>
 				<a href="/member/signin" class="btn btn-primary" sec:authorize="isAnonymous()">로그인 <iclass="fa fa-arrow-right ms-3"></i></a>

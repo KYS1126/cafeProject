@@ -14,41 +14,60 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cafeProject.dto.InsertCafeDto;
+import com.cafeProject.service.CafeService;
 
 import lombok.RequiredArgsConstructor;
 
+@RequestMapping("/cafe")
 @Controller
 @RequiredArgsConstructor
 public class InsertCafeController {
 	
+	private final CafeService cafeService;
 
 	//관리자용 카페 등록 페이지를 보여줌
-	@GetMapping(value = "/admin/insertcafe")
+	@GetMapping(value = "insertcafe")
 	public String cafeForm(Model model) {
-		model.addAttribute("insertCafeDto", model);
+		model.addAttribute("insertCafeDto", new InsertCafeDto());
 		return "/insert/insertcafe";
 	}
 	
 	//카페 등록하기
-	@PostMapping(value = "/admin/insertcafe/new")
+	@PostMapping(value = "new")
 	public String cafeNew(@Valid InsertCafeDto insertCafeDto, BindingResult bindingResult,
-			Model model, @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
+			Model model, @RequestParam("itemImgFile") List<MultipartFile> cafeImgFileList) {
 		
 		if(bindingResult.hasErrors()) {
+			model.addAttribute("errorMessage", "값을 받아오는 동안 문제가 생겼습니다.");
 			return "/insert/insertcafe";
 		}
 		
-		try {
-			
-		} catch (Exception e) {
-
+		if(cafeImgFileList.get(0).isEmpty() && insertCafeDto.getId() == null) {
+			model.addAttribute("errorMessage", "첫 번째 카페 이미지는 필수 입력 값입니다.");
+			return "insert/insertcafe";
 		}
 		
-		return null;
+		try {
+			cafeService.saveCafe(insertCafeDto, cafeImgFileList);
+			System.out.println(insertCafeDto);
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", "카페 등록 중 에러가 발생했습니다.");
+			return "insert/insertcafe";
+		}
+		
+		return "redirect:/";
+	}
+	
+	//카페 리스트 페이지 보여주기
+	@GetMapping(value = "list")
+	public String viewForm(Model model) {
+		model.addAttribute("insertCafeDto", new InsertCafeDto());
+		return "/cafelist/cafelist";
 	}
 	
 }

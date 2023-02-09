@@ -26,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 public class CafeService {
 
 	private final CafeRepository cafeRepository;
+	private final CafeImgService cafeImgService;
+	
 	
 	public Long saveCafe(InsertCafeDto insertCafeDto, List<MultipartFile> cafeImgFileList) throws Exception{
 		
@@ -41,8 +43,11 @@ public class CafeService {
 			} else {
 				cafeImg.setRepimgYn("N");
 			}
+			
+			cafeImgService.saveCafeImg(cafeImg, cafeImgFileList.get(i));
+			
 		}
 		
-		return null;
+		return cafe.getId();
 	}
 }

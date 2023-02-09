@@ -37,7 +37,11 @@ public class CafeImg {
 	@JoinColumn(name = "cafe_id")
 	private Cafe cafe;
 	
-	
+	public void updateCageImg(String oriImgName, String imgName, String imgUrl) {
+		this.imgOri = oriImgName;
+		this.imgNm = imgName;
+		this.imgUrl = imgUrl;
+	}
 	
 	
 	

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>카페 리스트</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="row g-4">
+			<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"
+				th:each="num:${#numbers.sequence(1,6)}">
+				<div class="membership-item position-relative">
+					<img class="img-fluid" src="/images/animal-lg-1.jpg" alt="" />
+					<h1 class="text-white mb-3">cafe name</h1>
+					<h3 class="text-white mb-3" style="font-size: 1.0rem">#tag</h3>
+					<h4 class="text-white mb-3">cafe address</h4>
+					<p>
+						<i class="fa fa-phone text-primary me-3"></i>cafe_tel
+					</p>
+					<p>
+						<i class="fa fa-door-closed text-primary me-3"></i>cafe open
+					</p>
+					<p>
+						<i class="fa fa-star text-primary me-3"></i>평점 : 4.5
+					</p>
+					<p>
+						<i class="fa fa-heart text-primary me-3"></i>찜 : 0
+					</p>
+					<div class="row g-3">
+						<div class="col-md-6">
+							<button class="btn btn-outline-light px-4 mt-1">찜하기</button>
+						</div>
+					</div>
+					<a class="btn btn-outline-light px-4 mt-3" href="">상세보기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
