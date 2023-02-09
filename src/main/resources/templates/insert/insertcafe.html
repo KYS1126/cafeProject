@@ -18,41 +18,34 @@
 							<span class="text-primary me-2">#</span>카페 등록
 						</p>
 						<h1 class="display-5 mb-4">카페 등록 하기</h1>
-						<form role="form" method="post" enctype="multipart/form-data" th:object="${cafeDto}">
+						<form role="form" method="post" enctype="multipart/form-data">
 							<div class="row g-3">
 								<div class="col-md-4">
 									<div class="form-floating">
-										<input th:field="*{cafeNm}" type="text" class="form-control bg-light border-0" id="name" placeholder="Your Name" /> 
+										<input type="text" class="form-control bg-light border-0" id="name" placeholder="Your Name" /> 
 										<label for="name">카페 이름</label>
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-floating">
-										<input th:field="*{cafeTel}" type="email" class="form-control bg-light border-0" id="email" placeholder="Your Email" /> 
+										<input type="email" class="form-control bg-light border-0" id="email" placeholder="Your Email" /> 
 										<label for="email">카페 전화번호</label>
 									</div>
 								</div>
 								<div class="col-md-4">
 									<div class="form-floating">
-										<input th:field="*{cafeClose}" type="text" class="form-control bg-light border-0" id="name" placeholder="Your Name" /> 
+										<input type="text" class="form-control bg-light border-0" id="name" placeholder="Your Name" /> 
 										<label for="name">카페 영업시간</label>
 									</div>
 								</div>
 								<div class="col-12">
 									<div class="form-floating">
-										<input th:field="*{cafeAddress}" type="text" class="form-control bg-light border-0" id="subject" placeholder="Subject" /> 
+										<input type="text" class="form-control bg-light border-0" id="subject" placeholder="Subject" /> 
 										<label for="subject">주소</label>
 									</div>
 								</div>
 
 								<!-- 이미지 삽입 start -->
-								<div class="col-6">
-									<div class="form-floating">
-										<input class="form-control bg-light border-0" type="file" id="itemImgFile" name="itemImgFile"/> 
-										<label for="formFile" class="form-label custom-file-label" th:text="상품이미지">메인 이미지</label>
-									</div>
-								</div>
-								
 								<div class="col-2" th:each="num:${#numbers.sequence(1,3)}">
 									<div class="form-floating">
 										<input type="text" class="form-control bg-light border-0" id="subject" placeholder="Subject" /> 
@@ -60,7 +53,7 @@
 									</div>
 								</div>
 								
-								<div class="col-6" th:each="num:${#numbers.sequence(1,2)}">
+								<div class="col-6" th:each="num:${#numbers.sequence(1,3)}">
 									<div class="form-floating">
 										<input class="form-control bg-light border-0" type="file" id="itemImgFile" name="itemImgFile"/> 
 										<label for="formFile" class="form-label custom-file-label" th:text="서브이미지 + ${num}"></label>
@@ -70,14 +63,14 @@
 
 								<div class="col-12">
 									<div class="form-floating">
-										<input th:field="*{cafeDetail}" class="form-control bg-light border-0"
+										<input class="form-control bg-light border-0"
 											placeholder="Leave a message here" id="message"
 											style="height: 300px"></input>
 										<label for="message">카페 상세 내용</label>
 									</div>
 								</div>
 								<div class="col-12">
-									<button th:formaction="@{/cafe/insert}" class="btn btn-primary w-100 py-3" type="submit">등록 완료</button>
+									<button class="btn btn-primary w-100 py-3" type="submit">등록 완료</button>
 								</div>
 							</div>
 						</form>
