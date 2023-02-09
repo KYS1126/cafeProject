@@ -24,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @Controller
 @RequiredArgsConstructor
 public class InsertCafeController {
+	
 
 	//관리자용 카페 등록 페이지를 보여줌
 	@GetMapping(value = "/admin/insertcafe")
@@ -37,7 +38,15 @@ public class InsertCafeController {
 	public String cafeNew(@Valid InsertCafeDto insertCafeDto, BindingResult bindingResult,
 			Model model, @RequestParam("itemImgFile") List<MultipartFile> itemImgFileList) {
 		
-		if() {}
+		if(bindingResult.hasErrors()) {
+			return "/insert/insertcafe";
+		}
+		
+		try {
+			
+		} catch (Exception e) {
+
+		}
 		
 		return null;
 	}
