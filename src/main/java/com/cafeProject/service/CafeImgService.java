@@ -19,5 +19,5 @@ public class CafeImgService {
 	
 	private final CafeImgRepository cafeImgRepository;
 	
-	private final FileService fileService;
+	private final FileService fileService;//dfgdfgd
 }
