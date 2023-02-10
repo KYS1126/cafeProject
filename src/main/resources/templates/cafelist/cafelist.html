@@ -7,56 +7,77 @@
 <title>카페 리스트</title>
 </head>
 <body>
-
+	<!-- 상품 카드 start-->
 	<div layout:fragment="content">
 		<div class="container-xxl py-5">
 			<div class="container">
 				<div class="row g-4">
-					<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"
-						th:each="num:${#numbers.sequence(1,6)}">
-						<div class="membership-item position-relative">
-							<img class="img-fluid" src="/images/animal-lg-1.jpg" alt="" />
-							<h1 class="text-white mb-3">cafe name</h1>
-							<h3 class="text-white mb-3" style="font-size: 1.0rem">#tag</h3>
-							<h4 class="text-white mb-3">cafe address</h4>
-							<p>
-								<i class="fa fa-phone text-primary me-3"></i>cafe_tel
-							</p>
-							<p>
-								<i class="fa fa-door-closed text-primary me-3"></i>cafe open
-							</p>
-							<p>
-								<i class="fa fa-star text-primary me-3"></i>평점 : 4.5
-							</p>
-							<p>
-								<i class="fa fa-heart text-primary me-3"></i>찜 : 0
-							</p>
-							<div class="row g-3">
-								<div class="col-md-6">
-									<button class="btn btn-outline-light px-4 mt-1">찜하기</button>
+					<th:block th:each="cafe, status: ${cafes.getContent()}">
+						<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+							<div class="membership-item position-relative">
+								<img th:src="${cafe.imgUrl}" class="img-fluid"
+									th:alt="${cafe.cafeNm}" />
+								<h1 class="text-white mb-3">[[${cafe.cafeNm}]]</h1>
+								<h3 class="text-white mb-3" style="font-size: 1.0rem">#tag</h3>
+								<h4 class="text-white mb-3">[[${cafe.cafeAddress}]]</h4>
+								<p><i class="fa fa-phone text-primary me-3"></i>[[${cafe.cafeTel}]]</p>
+								<p><i title="영업시간" class="fa fa-door-closed text-primary me-3"></i>[[${cafe.cafeClose}]]</p>
+								<p><i class="fa fa-star text-primary me-3"></i>평점 : 4.5</p>
+								<p><i class="fa fa-heart text-primary me-3"></i>찜 : 0</p>
+								<div class="row g-3">
+									<div class="col-md-6">
+										<button class="btn btn-outline-light px-4 mt-1">찜하기</button>
+									</div>
 								</div>
+								<a class="btn btn-outline-light px-4 mt-3" href="#">상세보기</a>
 							</div>
-							<a class="btn btn-outline-light px-4 mt-3" href="">상세보기</a>
 						</div>
-					</div>
+					</th:block>
 				</div>
 			</div>
 		</div>
+		<!-- 상품 카드 end -->
 
-		
-		<div class="position-relative mx-auto" style="max-width: 400px; border: 3px solid #4dc387;">
-			<input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="검색어를 입력해주세요." />
-			<button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Search</button>
-		</div>
-				
-			
-		
-			<!-- 페이징 start -->
+		<!-- 검색창 start -->
+		<form th:action="@{/cafe/list}" method="get">
+			<div class="position-relative mx-auto"
+				style="max-width: 400px; border: 3px solid #4dc387;">
+				<input name="searchQuery" class="form-control border-0 w-100 py-3 ps-4 pe-5"
+					type="search" placeholder="검색어를 입력해주세요." aria-label="Search"/>
+				<button type="submit"
+					class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Search</button>
+			</div>
+		</form>
+		<!-- 검색창 end -->
 
 
-			<!-- 페이징 end -->
+
+		<!-- 페이징 start -->
+		<nav
+			th:with="start=${(cafes.number/maxPage)*maxPage + 1}, 
+					  end=(${(cafes.totalPages == 0) ? 1 : (start + (maxPage -1) < cafes.totalPages ? start + (maxPage -1) : cafes.totalPages)})"
+			aria-label="Page navigation example">
+			<ul class="pagination d-flex justify-content-center">
+				<li class="page-item" th:classappend="${cafes.first}? 'disabled'">
+					<!-- 검색을 get 방식으로 받기 때문에 이전/다음 버튼을 눌러도 쿼리 스트링이 유지되어야 한다. --> 
+					<a th:href="@{'/cafe/list' + '?searchQuery=' + ${cafeSearchDto.searchQuery} + '&page=' + ${cafes.number-1}}" class="page-link"> 
+					<span>이전</span></a>
+				</li>
+				<li class="page-item"
+					th:each="page: ${#numbers.sequence(start, end)}"
+					th:classappend="${cafes.number eq page-1}?'active':''"><a
+					class="page-link" th:inline="text"
+					th:href="@{'/cafe/list' + '?searchQuery=' + ${cafeSearchDto.searchQuery} + '&page=' + ${page-1}}">[[${page}]]</a>
+				</li>
+				<li class="page-item" th:classappend="${cafes.last}? 'disabled'">
+					<a class="page-link"
+					th:href="@{'/cafe/list' + '?searchQuery=' + ${cafeSearchDto.searchQuery} + '&page=' + ${cafes.number+1}}">Next</a>
+				</li>
+			</ul>
+		</nav>
+		<!-- 페이징 end -->
 
 
-		</div>
+	</div>
 </body>
 </html>

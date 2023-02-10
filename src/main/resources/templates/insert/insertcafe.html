@@ -90,7 +90,7 @@
 								<!-- 이미지 삽입 start -->
 								<div class="col-6" th:each="num:${#numbers.sequence(1,3)}">
 									<div class="form-floating">
-										<input class="form-control bg-light border-0" type="file" id="itemImgFile" name="itemImgFile"/> 
+										<input class="form-control bg-light border-0 custom-file-label" type="file" id="itemImgFile" name="itemImgFile"/> 
 										<label for="formFile" class="form-label custom-file-label" th:text="서브이미지 + ${num}"></label>
 									</div>
 								</div>
@@ -98,7 +98,7 @@
 
 								<div class="col-12">
 									<div class="form-floating">
-										<input class="form-control bg-light border-0"
+										<input class="form-control bg-light border-0 custom-file-input"
 											placeholder="Leave a message here" id="cafeDetail"
 											th:field="*{cafeDetail}"
 											style="height: 300px"></input>

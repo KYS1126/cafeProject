@@ -18,7 +18,7 @@ import lombok.Setter;
 @Table(name="cafe_img") 
 @Getter
 @Setter
-public class CafeImg {
+public class CafeImg extends BaseEntity{
 	
 	@Id
 	@Column(name="item_img_id")

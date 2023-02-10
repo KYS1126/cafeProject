@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cafeProject.dto.CafeListDto;
+import com.cafeProject.dto.CafeSearchDto;
 import com.cafeProject.dto.InsertCafeDto;
 import com.cafeProject.service.CafeService;
 
@@ -43,7 +45,6 @@ public class InsertCafeController {
 			Model model, @RequestParam("itemImgFile") List<MultipartFile> cafeImgFileList) {
 		
 		if(bindingResult.hasErrors()) {
-			model.addAttribute("errorMessage", "값을 받아오는 동안 문제가 생겼습니다.");
 			return "/insert/insertcafe";
 		}
 		
@@ -65,9 +66,21 @@ public class InsertCafeController {
 	
 	//카페 리스트 페이지 보여주기
 	@GetMapping(value = "list")
-	public String viewForm(Model model) {
-		model.addAttribute("insertCafeDto", new InsertCafeDto());
+	public String viewForm(CafeSearchDto cafeSearchDto, Optional<Integer> page, Model model) {
+		//Optional -> 값이 null이여도 오류를 발생시키지 않는 객체
+		//isPresent() -> boolean 타입 Optional 타입에 값이 있으면 true 없으면 false
+		Pageable pafeable = PageRequest.of(page.isPresent() ? page.get() : 0, 6);
+		
+		Page<CafeListDto> cafes = cafeService.getMainItemPage(cafeSearchDto, pafeable);
+		
+		model.addAttribute("cafes", cafes);
+		model.addAttribute("cafeSearchDto", cafeSearchDto);
+		model.addAttribute("maxPage", 5);
+		
+		
+		
 		return "/cafelist/cafelist";
 	}
+
 	
 }

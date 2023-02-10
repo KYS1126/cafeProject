@@ -13,10 +13,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cafeProject.dto.CafeListDto;
+import com.cafeProject.dto.CafeSearchDto;
 import com.cafeProject.dto.InsertCafeDto;
 import com.cafeProject.entity.Cafe;
 import com.cafeProject.entity.CafeImg;
 import com.cafeProject.repository.CafeRepository;
+import com.cafeProject.repository.CafeRepositoryCustom;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,7 +31,7 @@ public class CafeService {
 	private final CafeRepository cafeRepository;
 	private final CafeImgService cafeImgService;
 	
-	
+	//이미지 등록
 	public Long saveCafe(InsertCafeDto insertCafeDto, List<MultipartFile> cafeImgFileList) throws Exception{
 		
 		Cafe cafe = insertCafeDto.createCafe();
@@ -50,4 +53,15 @@ public class CafeService {
 		
 		return cafe.getId();
 	}
+	
+	@Transactional(readOnly = true)
+	public Page<Cafe> getAdminItemPage(CafeSearchDto itemSearchDto, Pageable pageable) {
+		return cafeRepository.getAdminCafePage(itemSearchDto, pageable);
+	}
+	
+	@Transactional(readOnly = true)
+	public Page<CafeListDto> getMainItemPage(CafeSearchDto itemSearchDto, Pageable pageable) {
+		return cafeRepository.getCafeListPage(itemSearchDto, pageable);
+	}
+	
 }
