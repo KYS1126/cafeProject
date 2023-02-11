@@ -77,9 +77,13 @@ public class InsertCafeController {
 		model.addAttribute("cafeSearchDto", cafeSearchDto);
 		model.addAttribute("maxPage", 5);
 		
-		
-		
 		return "/cafelist/cafelist";
+	}
+	
+	//관리자용 카페 등록 페이지를 보여줌
+	@GetMapping(value = "cafeDetail")
+	public String cafeDetail() {
+		return "/cafelist/cafeDetail";
 	}
 
 	

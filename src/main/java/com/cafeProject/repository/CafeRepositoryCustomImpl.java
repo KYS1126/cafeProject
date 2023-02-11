@@ -53,8 +53,6 @@ public class CafeRepositoryCustomImpl implements CafeRepositoryCustom{
 	private BooleanExpression searchByLike(String searchBy, String searchQuery) {
 		if(StringUtils.equals("cafeNm", searchBy)) {
 			return QCafe.cafe.cafeNm.like("%" + searchQuery + "%");
-		} else if (StringUtils.equals("c", searchQuery)) {
-			return QCafe.cafe.createdBy.like("%" + searchQuery + "%");
 		}
 		
 		return null;
@@ -79,12 +77,12 @@ public class CafeRepositoryCustomImpl implements CafeRepositoryCustom{
 		return new PageImpl<>(content, pageable, total);
 	}
 	
-	private BooleanExpression itemNmLike(String searchQuery) {
+	private BooleanExpression cafeNmLike(String searchQuery) {
 		return StringUtils.isEmpty(searchQuery) ? null : QCafe.cafe.cafeNm.like("%" + searchQuery + "%");
 	}
 
 	@Override
-	public Page<CafeListDto> getCafeListPage(CafeSearchDto itemSearchDto, Pageable pageable) {
+	public Page<CafeListDto> getCafeListPage(CafeSearchDto cafeSearchDto, Pageable pageable) {
 		//QItem과 QItemImg 불러온다.
 		QCafe cafe = QCafe.cafe;
 		QCafeImg cafeImg = QCafeImg.cafeImg;
@@ -102,7 +100,7 @@ public class CafeRepositoryCustomImpl implements CafeRepositoryCustom{
 				.from(cafeImg)
 				.join(cafeImg.cafe, cafe)	//item을 통해서 두 테이블 join
 				.where(cafeImg.repimgYn.eq("Y"))
-				.where(itemNmLike(itemSearchDto.getSearchQuery()))
+				.where(cafeNmLike(cafeSearchDto.getSearchQuery()))
 				.orderBy(cafe.id.desc())
 				.offset(pageable.getOffset())	//데이터를 가져올 시작 index
 				.limit(pageable.getPageSize())	//한 번에 가져올 데이터의 최대 개수
@@ -114,7 +112,7 @@ public class CafeRepositoryCustomImpl implements CafeRepositoryCustom{
 				.from(cafeImg)
 				.join(cafeImg.cafe, cafe)
 				.where(cafeImg.repimgYn.eq("Y"))
-				.where(itemNmLike(itemSearchDto.getSearchQuery()))
+				.where(cafeNmLike(cafeSearchDto.getSearchQuery()))
 				.fetchOne();
 				
 		//이렇게 리턴 시키면 스프링이 알아서 Page 객체를 만들어준다.

@@ -52,12 +52,4 @@ public class Cafe extends BaseEntity{
 		this.cafeClose = insertCafeDto.getCafeClose();
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
 }

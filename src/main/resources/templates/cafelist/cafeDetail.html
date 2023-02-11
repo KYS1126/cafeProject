@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<head>
+<meta charset="UTF-8">
+<title>카페 상세보기</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<!-- About Start -->
+		<div class="container-xxl py-5">
+			<div class="container">
+				<div class="row g-5">
+					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+						<p>
+							<span class="text-primary me-2">#</span>카페 상세보기
+						</p>
+						<h1 class="display-5 mb-4">
+							카페<span class="text-primary">상세보기</span>
+							
+						</h1>
+						<p class="mb-4">카페 상세설명</p>
+						<h5 class="mb-3">
+							<i class="far fa-check-circle text-primary me-3"></i>태그
+						</h5>
+						<h5 class="mb-3">
+							<i class="far fa-check-circle text-primary me-3"></i>영업시간
+						</h5>
+						<h5 class="mb-3">
+							<i class="far fa-check-circle text-primary me-3"></i>장소
+						</h5>
+						<h5 class="mb-3">
+							<i class="far fa-check-circle text-primary me-3"></i>후기
+						</h5>
+						<a class="btn btn-primary py-3 px-5 mt-3" href="">리뷰 작성</a>
+					</div>
+					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+						<div class="img-border">
+							<img class="img-fluid" src="images/about.jpg" alt="" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- About End -->
+</body>
+</html>
