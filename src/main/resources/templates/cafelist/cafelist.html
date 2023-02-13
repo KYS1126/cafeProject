@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/layout}">
 <head>
 <meta charset="UTF-8">
 <title>카페 리스트</title>
+
+</th:block>
 </head>
 <body>
 	<!-- 상품 카드 start-->
@@ -29,7 +32,16 @@
 										<button class="btn btn-outline-light px-4 mt-1">찜하기</button>
 									</div>
 								</div>
-								<a class="btn btn-outline-light px-4 mt-3" href="#">상세보기</a>
+								<a class="btn btn-outline-light px-4 mt-3" th:href="'/cafe/'+${cafe.id}">상세보기</a>
+								<div>
+									<a class="btn btn-outline-light px-4 mt-3" th:href="'/cafe/delete/'+${cafe.id}" 
+									sec:authorize="hasAnyAuthority('ROLE_ADMIN')" 
+									th:value="${cafe.id}" onclick="deleteCafe(this.value)">관리자용(삭제하기)</a>
+								</div>
+								<div>
+									<a class="btn btn-outline-light px-4 mt-3" th:href="'/cafe/update/'+${cafe.id}" 
+									sec:authorize="hasAnyAuthority('ROLE_ADMIN')">관리자용(수정하기)</a>
+								</div>
 							</div>
 						</div>
 					</th:block>

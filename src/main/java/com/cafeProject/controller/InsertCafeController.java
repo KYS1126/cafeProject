@@ -61,6 +61,7 @@ public class InsertCafeController {
 			return "insert/insertcafe";
 		}
 		
+		
 		return "redirect:/";
 	}
 	
@@ -80,10 +81,49 @@ public class InsertCafeController {
 		return "/cafelist/cafelist";
 	}
 	
-	//관리자용 카페 등록 페이지를 보여줌
-	@GetMapping(value = "cafeDetail")
-	public String cafeDetail() {
+	//카페 상세보기
+	@GetMapping(value = "{cafeId}")
+	public String cafeDetail(Model model, @PathVariable("cafeId") Long cafeId) {
+		InsertCafeDto insetCafeDto = cafeService.getCafeDtl(cafeId);
+		model.addAttribute("cafe", insetCafeDto);
 		return "/cafelist/cafeDetail";
+	}
+	
+	//테마추가(관리자용)
+	@GetMapping(value = "inserttheme")
+	public String inserttheme() {
+		return "/insert/theme";
+	}
+	
+	//카페 수정 페이지 보기
+	@GetMapping(value = "/update/{cafeId}")
+	public String cafeUpdate (@PathVariable("itemId") Long itemId, Model model) {}
+	
+	//카페 수정 페이지 보기
+
+//	==============================
+	//카페 업데이트
+	@PostMapping(value = "update/{cafeId}")
+	public String cafeUpdateBT(@Valid InsertCafeDto insertCafeDto, BindingResult bindingResult,
+			Model model, @RequestParam("cafeImgFile") List<MultipartFile> cafeImgFileList) {
+		
+		if(bindingResult.hasErrors()) {
+			return "cafelist/cafelist";
+		}
+		
+		if (cafeImgFileList.get(0).isEmpty() && insertCafeDto.getId() == null) {
+			model.addAttribute("errorMessage", "첫 번째 상품 이미지는 필수 입력 값입니다.");
+			return "cafelist/cafelist";
+		}
+		
+		return null;
+	}
+	
+//	==============================
+	//카페 삭제
+	@GetMapping(value = "delete/{cafeId}")
+	public String deleteCafe() {
+		return null;
 	}
 
 	

@@ -33,6 +33,12 @@ public class InsertCafeDto {
 	@NotNull(message = "카페 휴무일은 필수 입력 값입니다.")
 	private String cafeClose; //카페 휴무일
 	
+	
+	private List<CafeImgDto> cafeImgDtoList = new ArrayList<>(); //상품 이미지 리스트 저장	
+	
+	private List<Long> cafeImgIds = new ArrayList<>(); //상품 이미지 아이디 저장	
+	
+	
 	//get set 자동 지정
 	private static ModelMapper modelMapper = new ModelMapper();
 	

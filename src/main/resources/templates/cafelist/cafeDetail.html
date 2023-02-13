@@ -26,19 +26,19 @@
 							<i class="far fa-check-circle text-primary me-3"></i>태그
 						</h5>
 						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>영업시간
+							<i class="far fa-check-circle text-primary me-3" th:text="${cafe.cafeNm}"></i>
 						</h5>
 						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>장소
+							<i class="far fa-check-circle text-primary me-3" th:text="${cafe.cafeAddress}"></i>
 						</h5>
 						<h5 class="mb-3">
-							<i class="far fa-check-circle text-primary me-3"></i>후기
+							<i class="far fa-check-circle text-primary me-3" th:text="${cafe.cafeDetail}"></i>
 						</h5>
 						<a class="btn btn-primary py-3 px-5 mt-3" href="">리뷰 작성</a>
 					</div>
 					<div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
 						<div class="img-border">
-							<img class="img-fluid" src="images/about.jpg" alt="" />
+							<img class="img-fluid" th:src="${cafe.cafeImgDtoList[0].img_Url}" alt="" />
 						</div>
 					</div>
 				</div>
