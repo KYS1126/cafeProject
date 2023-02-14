@@ -96,12 +96,23 @@ public class InsertCafeController {
 	}
 	
 	//카페 수정 페이지 보기
-	@GetMapping(value = "/update/{cafeId}")
-	public String cafeUpdate (@PathVariable("itemId") Long itemId, Model model) {}
-	
+	@GetMapping(value = "update/{cafeId}")
+	public String cafeUpdate(@PathVariable("cafeId") Long cafeId, Model model) {
+		try {
+			InsertCafeDto insertCafeDto = cafeService.getCafeDtl(cafeId);
+			model.addAttribute(insertCafeDto);
+		} catch (Exception e) {
+			model.addAttribute("errormessage", "상품 수정 중 에러가 발생했습니다.");
+			model.addAttribute("insertCafeDto", new InsertCafeDto());
+			return "insert/updatecafe";
+		}
+		return "insert/updatecafe";
+	}
+
 	//카페 수정 페이지 보기
 
 //	==============================
+	
 	//카페 업데이트
 	@PostMapping(value = "update/{cafeId}")
 	public String cafeUpdateBT(@Valid InsertCafeDto insertCafeDto, BindingResult bindingResult,
@@ -116,15 +127,18 @@ public class InsertCafeController {
 			return "cafelist/cafelist";
 		}
 		
-		return null;
+		try {
+			cafeService.updateCafe(insertCafeDto, cafeImgFileList);
+		} catch (Exception e) {
+			model.addAttribute("errorMessage", "상품 수정 중 에러가 발생하였습니다.");
+			return "cafelist/cafelist";
+		}
+		
+		return "redirect:/";
 	}
 	
-//	==============================
-	//카페 삭제
-	@GetMapping(value = "delete/{cafeId}")
-	public String deleteCafe() {
-		return null;
-	}
+	
+
 
 	
 }

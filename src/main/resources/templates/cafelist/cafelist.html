@@ -9,6 +9,15 @@
 
 </th:block>
 </head>
+<th:block layout:fragment="script">
+    <script>
+	function delCheck(value){
+		if(confirm('정말 삭제하시겠습니까?')){
+			location.href='/cafe/delete/'+value;
+		}
+	}
+    </script>
+</th:block>
 <body>
 	<!-- 상품 카드 start-->
 	<div layout:fragment="content">
@@ -34,9 +43,7 @@
 								</div>
 								<a class="btn btn-outline-light px-4 mt-3" th:href="'/cafe/'+${cafe.id}">상세보기</a>
 								<div>
-									<a class="btn btn-outline-light px-4 mt-3" th:href="'/cafe/delete/'+${cafe.id}" 
-									sec:authorize="hasAnyAuthority('ROLE_ADMIN')" 
-									th:value="${cafe.id}" onclick="deleteCafe(this.value)">관리자용(삭제하기)</a>
+									<a class="btn btn-outline-light px-4 mt-3" sec:authorize="hasAnyAuthority('ROLE_ADMIN')" th:onclick="delCheck([[${cafe.id}]])">관리자용(삭제하기)</a>
 								</div>
 								<div>
 									<a class="btn btn-outline-light px-4 mt-3" th:href="'/cafe/update/'+${cafe.id}" 
@@ -62,7 +69,7 @@
 
 
 		<!-- 페이징 start -->
-		<nav
+		<nav style="margin-top: 20px;"
 			th:with="start=${(cafes.number/maxPage)*maxPage + 1}, 
 					  end=(${(cafes.totalPages == 0) ? 1 : (start + (maxPage -1) < cafes.totalPages ? start + (maxPage -1) : cafes.totalPages)})"
 			aria-label="Page navigation example">

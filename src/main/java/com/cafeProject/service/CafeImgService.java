@@ -1,5 +1,6 @@
 package com.cafeProject.service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.apache.groovy.parser.antlr4.util.StringUtils;
@@ -17,8 +18,8 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class CafeImgService {
 	
-	@Value("${itemImgLocation}")
-	private String itemImgLocation; //C:/cafe/item
+	@Value("${cafeImgLocation}")
+	private String cafeImgLocation; //C:/cafe/item
 	
 	private final CafeImgRepository cafeImgRepository;
 	
@@ -30,7 +31,7 @@ public class CafeImgService {
 		String imgUrl = "";
 
 		if(!StringUtils.isEmpty(oriImgNmae)) {
-			imgName = fileService.uploadFile(itemImgLocation, oriImgNmae, cafeImgFile.getBytes());
+			imgName = fileService.uploadFile(cafeImgLocation, oriImgNmae, cafeImgFile.getBytes());
 			imgUrl = "/images/item/" + imgName;
 		}
 		
@@ -40,6 +41,27 @@ public class CafeImgService {
 		
 	}
 	
+	public void updateCafeImg (Long cafeImgId, MultipartFile cafeImgFile) throws Exception{
+		
+		if(!cafeImgFile.isEmpty()) { //파일이 있으면
+			CafeImg savedCafeImg = cafeImgRepository.findById(cafeImgId)
+					.orElseThrow(EntityNotFoundException::new);
+			
+			
+			if(!StringUtils.isEmpty(savedCafeImg.getImgNm())) {//savedItemImg에서 getImgName이 있으면
+				fileService.deleteFile(cafeImgLocation + "/" + savedCafeImg);
+				
+			}
+			
+			//이미지 파일 업로드
+			String oriImgName = cafeImgFile.getOriginalFilename();
+			String imgName = fileService.uploadFile(cafeImgLocation, oriImgName, cafeImgFile.getBytes());
+			String imgUrl = "/images/item/" + imgName;
+			
+			savedCafeImg.updateCageImg(oriImgName, imgName, imgUrl);
+		}
+		
+	}
 	
 	
 }

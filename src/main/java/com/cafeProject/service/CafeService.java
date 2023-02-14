@@ -93,4 +93,25 @@ public class CafeService {
 		return cafeRepository.getCafeListPage(itemSearchDto, pageable);
 	}
 	
+	//카페 수정
+	public Long updateCafe(InsertCafeDto insertCafeDto, List<MultipartFile> cafeImgFileList) throws Exception {
+		Cafe cafe = cafeRepository.findById(insertCafeDto.getId())
+				.orElseThrow(EntityNotFoundException::new);
+		
+		cafe.updateCafe(insertCafeDto); //수정한 데이터를 넣어준다.
+		
+		List<Long> cafeImgids = insertCafeDto.getCafeImgIds();
+		
+		for(int i = 0; i<cafeImgFileList.size(); i++) {
+			cafeImgService.updateCafeImg(cafeImgids.get(i), cafeImgFileList.get(i));
+		}
+		
+		return cafe.getId();
+	}
+	
+	public void deleteCafe (Long cafeId) {
+		Cafe cafe = cafeRepository.findById(cafeId).orElseThrow(EntityNotFoundException::new);
+		cafeRepository.delete(cafe);
+	}
+	
 }

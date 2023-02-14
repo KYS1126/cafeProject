@@ -1,5 +1,9 @@
 package com.cafeProject.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.jpa.repository.Temporal;
@@ -42,6 +47,9 @@ public class Cafe extends BaseEntity{
 	
 	@Column(nullable = false)
 	private String cafeClose;	//카페 휴무일
+	
+    @OneToMany(mappedBy = "cafe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CafeImg> childList = new ArrayList<>();
 	
 	//DTO를 엔티티에 각각 매핑
 	public void updateCafe(InsertCafeDto insertCafeDto) {
