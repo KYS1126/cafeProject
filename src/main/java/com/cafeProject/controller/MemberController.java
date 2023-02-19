@@ -41,7 +41,6 @@ public class MemberController {
 		if(bindingResult.hasErrors()) {
 			return "member/signup";
 		}
-		
 		try {
 			Member member = Member.createMember(memberDto, passwordEncoder);
 			memberService.saveMember(member);
@@ -49,7 +48,6 @@ public class MemberController {
 			model.addAttribute("errorMessage", e.getMessage());
 			return "member/signup";
 		}
-		
 		return "redirect:/";
 	}
 	
