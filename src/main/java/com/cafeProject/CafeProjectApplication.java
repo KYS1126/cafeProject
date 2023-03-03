@@ -1,4 +1,4 @@
-package com.cafeProject;
+package com.cafeProject; 
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
