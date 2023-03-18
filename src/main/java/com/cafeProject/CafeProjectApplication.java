@@ -8,7 +8,7 @@ public class CafeProjectApplication {
   
 	public static void main(String[] args) {        
 		SpringApplication.run(CafeProjectApplication.class, args);   
-	}   
+	}  
  
 }   
      
